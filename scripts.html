@@ -2,76 +2,118 @@
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>x2SAXZRLzzz - Scripts</title>
+<title>Zeion Hub - Scripts</title>
 
 <style>
-body {
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
   background:#0a0a0a;
   color:white;
   font-family:sans-serif;
-  text-align:center;
+  overflow-x:hidden;
 }
 
-h1 {
+/* Title */
+h1{
+  text-align:center;
   margin:40px 0;
   font-size:28px;
+  background:linear-gradient(90deg,#00ffe1,#0066ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
-/* grid */
-.grid {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
+/* Grid */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
   padding:20px;
 }
 
-/* card */
-.card {
-  width:250px;
+/* Card */
+.card{
   background:#111;
   padding:25px;
   border-radius:15px;
   cursor:pointer;
   transition:0.3s;
+  position:relative;
+  overflow:hidden;
 }
 
-.card:hover {
-  transform:translateY(-10px);
-  box-shadow:0 0 20px #00ffe1;
+/* Glow effect */
+.card::before{
+  content:"";
+  position:absolute;
+  width:200%;
+  height:200%;
+  background:linear-gradient(45deg,transparent,#00ffe1,transparent);
+  top:-50%;
+  left:-50%;
+  opacity:0;
+  transition:0.5s;
 }
 
-.card h3 {
-  margin-bottom:10px;
+.card:hover::before{
+  opacity:0.2;
+}
+
+.card:hover{
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 0 25px #00ffe1;
+}
+
+/* Text */
+.card h3{
   color:#00ffe1;
+  margin-bottom:10px;
 }
 
-.card p {
+.card p{
   color:#aaa;
   font-size:14px;
+}
+
+/* Badge */
+.badge{
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:#00ffe1;
+  color:black;
+  font-size:10px;
+  padding:3px 8px;
+  border-radius:6px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>Select Script</h1>
+<h1>Script Hub</h1>
 
 <div class="grid">
 
   <div class="card" onclick="go('blox')">
+    <div class="badge">HOT</div>
     <h3>Blox Fruits</h3>
-    <p>Auto farm / skills / fast</p>
+    <p>Auto Farm • Auto Skill • Fast</p>
   </div>
 
   <div class="card" onclick="go('aimbot')">
     <h3>Aimbot</h3>
-    <p>Lock target / smooth aim</p>
+    <p>Smooth Aim • Lock Target</p>
   </div>
 
   <div class="card" onclick="go('boat')">
     <h3>Build A Boat</h3>
-    <p>Auto build / farm gold</p>
+    <p>Auto Build • Farm Gold</p>
   </div>
 
 </div>
