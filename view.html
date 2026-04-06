@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View Script</title>
+
+<style>
+body {
+  background:#0a0a0a;
+  color:white;
+  font-family:monospace;
+  padding:20px;
+}
+
+h2 {
+  margin-bottom:10px;
+}
+
+pre {
+  background:#111;
+  padding:15px;
+  border-radius:10px;
+  overflow-x:auto;
+}
+
+button {
+  margin-top:15px;
+  padding:10px 20px;
+  background:#00ffe1;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h2 id="title"></h2>
+
+<pre id="code"></pre>
+
+<button onclick="copy()">Copy Script</button>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const type = params.get("script");
+
+let scripts = {
+  blox: "loadstring(game:HttpGet("https://raw.githubusercontent.com/Teufkijdjd/ZeionVisual/refs/heads/main/Zeionhub"))()",
+  aimbot: "loadstring(game:HttpGet("https://raw.githubusercontent.com/Teufkijdjd/Aimzeion/refs/heads/main/Aim"))()",
+  boat: "loadstring(game:HttpGet("https://raw.githubusercontent.com/Teufkijdjd/Zeion/refs/heads/main/Zeion"))()"
+};
+
+document.getElementById("code").innerText = scripts[type] || "Not Found";
+document.getElementById("title").innerText = type ? type.toUpperCase() : "ERROR";
+
+function copy(){
+  navigator.clipboard.writeText(scripts[type]);
+  alert("Copied!");
+}
+</script>
+
+</body>
+</html>
