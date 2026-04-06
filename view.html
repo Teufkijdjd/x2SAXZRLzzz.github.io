@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>View Script</title>
@@ -8,55 +8,79 @@
 body {
   background:#0a0a0a;
   color:white;
-  font-family:monospace;
+  font-family:sans-serif;
   padding:20px;
 }
 
-h2 {
-  margin-bottom:10px;
-}
-
-pre {
+/* container */
+.box {
   background:#111;
-  padding:15px;
-  border-radius:10px;
-  overflow-x:auto;
+  padding:20px;
+  border-radius:15px;
 }
 
+/* title */
+h2 {
+  margin-bottom:15px;
+  color:#00ffe1;
+}
+
+/* code */
+textarea {
+  width:100%;
+  height:150px;
+  background:#0f0f0f;
+  color:#00ffe1;
+  border:none;
+  border-radius:10px;
+  padding:10px;
+  font-family:monospace;
+}
+
+/* button */
 button {
   margin-top:15px;
-  padding:10px 20px;
-  background:#00ffe1;
+  padding:10px;
+  width:100%;
+  background:linear-gradient(90deg,#00ffe1,#0066ff);
   border:none;
-  border-radius:6px;
+  border-radius:10px;
+  font-weight:bold;
   cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover {
+  box-shadow:0 0 15px #00ffe1;
 }
 </style>
 </head>
 
 <body>
 
-<h2 id="title"></h2>
-
-<pre id="code"></pre>
-
-<button onclick="copy()">Copy Script</button>
+<div class="box">
+  <h2 id="title"></h2>
+  <textarea id="codeBox" readonly></textarea>
+  <button onclick="copy()">Copy Script</button>
+</div>
 
 <script>
 const params = new URLSearchParams(window.location.search);
 const type = params.get("script");
 
 let scripts = {
-  blox: "loadstring(game:HttpGet("https://raw.githubusercontent.com/Teufkijdjd/ZeionVisual/refs/heads/main/Zeionhub"))()",
-  aimbot: "loadstring(game:HttpGet("https://raw.githubusercontent.com/Teufkijdjd/Aimzeion/refs/heads/main/Aim"))()",
-  boat: "loadstring(game:HttpGet("https://raw.githubusercontent.com/Teufkijdjd/Zeion/refs/heads/main/Zeion"))()"
+  blox: "loadstring(game:HttpGet('https://example.com/blox'))()",
+  aimbot: "loadstring(game:HttpGet('https://example.com/aimbot'))()",
+  boat: "loadstring(game:HttpGet('https://example.com/boat'))()"
 };
 
-document.getElementById("code").innerText = scripts[type] || "Not Found";
+document.getElementById("codeBox").value = scripts[type] || "Not Found";
 document.getElementById("title").innerText = type ? type.toUpperCase() : "ERROR";
 
 function copy(){
-  navigator.clipboard.writeText(scripts[type]);
+  let box = document.getElementById("codeBox");
+  box.select();
+  document.execCommand("copy");
   alert("Copied!");
 }
 </script>
