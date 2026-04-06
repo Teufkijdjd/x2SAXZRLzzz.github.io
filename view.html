@@ -1,89 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>View Script</title>
-
-<style>
-body {
-  background:#0a0a0a;
-  color:white;
-  font-family:sans-serif;
-  padding:20px;
-}
-
-/* container */
-.box {
-  background:#111;
-  padding:20px;
-  border-radius:15px;
-}
-
-/* title */
-h2 {
-  margin-bottom:15px;
-  color:#00ffe1;
-}
-
-/* code */
-textarea {
-  width:100%;
-  height:150px;
-  background:#0f0f0f;
-  color:#00ffe1;
-  border:none;
-  border-radius:10px;
-  padding:10px;
-  font-family:monospace;
-}
-
-/* button */
-button {
-  margin-top:15px;
-  padding:10px;
-  width:100%;
-  background:linear-gradient(90deg,#00ffe1,#0066ff);
-  border:none;
-  border-radius:10px;
-  font-weight:bold;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-button:hover {
-  box-shadow:0 0 15px #00ffe1;
-}
-</style>
-</head>
-
-<body>
-
-<div class="box">
-  <h2 id="title"></h2>
-  <textarea id="codeBox" readonly></textarea>
-  <button onclick="copy()">Copy Script</button>
-</div>
-
 <script>
-const params = new URLSearchParams(window.location.search);
-const type = params.get("script");
+let p = new URLSearchParams(location.search).get("script")
 
-let scripts = {
+let s = {
   blox: "loadstring(game:HttpGet('https://example.com/blox'))()",
   aimbot: "loadstring(game:HttpGet('https://example.com/aimbot'))()",
   boat: "loadstring(game:HttpGet('https://example.com/boat'))()"
-};
+}
 
-document.getElementById("codeBox").value = scripts[type] || "Not Found";
-document.getElementById("title").innerText = type ? type.toUpperCase() : "ERROR";
-
-function copy(){
-  let box = document.getElementById("codeBox");
-  box.select();
-  document.execCommand("copy");
-  alert("Copied!");
+/* debug กันพลาด */
+if(!p || !s[p]){
+  document.getElementById("title").innerText = "Script Not Found"
+  document.getElementById("code").value = "Error: script not found"
+}else{
+  document.getElementById("title").innerText = p.toUpperCase()
+  document.getElementById("code").value = s[p]
 }
 </script>
-
-</body>
-</html>
